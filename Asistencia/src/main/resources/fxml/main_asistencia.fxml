@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pe.edu.upeu.asistencia.control.Asistenciacontroller"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.asistencia.control.Asistenciacontroller">
+   <children>
+      <Label layoutX="152.0" layoutY="22.0" text="ejemplo" />
+      <TextField fx:id="txtnum1" layoutX="99.0" layoutY="39.0" />
+      <TextField fx:id="txtnum2" layoutX="275.0" layoutY="39.0" />
+      <Button layoutX="443.0" layoutY="39.0" mnemonicParsing="false" onAction="#sumar" text="sumar" />
+      <Label fx:id="txtresult" layoutX="160.0" layoutY="77.0" text="Label" />
+   </children>
 </AnchorPane>
