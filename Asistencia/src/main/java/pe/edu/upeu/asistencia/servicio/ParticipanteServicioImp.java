@@ -8,20 +8,20 @@ import java.util.List;
 
 @Service
 public class ParticipanteServicioImp extends ParticipanteRepository implements ParticipanteServicioI {
+
     @Override
     public void save(Participante participante) {
         participantes.add(participante);
     }
 
     @Override
-    public List<Participante> findAll() {
+    public List<Participante> findAll(){
         if(participantes.size()==1){
             return super.findAll();
         }
         return participantes;
     }
 
-    
     @Override
     public Participante update(Participante participante, int index) {
         return participantes.set(index, participante);
@@ -30,11 +30,11 @@ public class ParticipanteServicioImp extends ParticipanteRepository implements P
     @Override
     public void delete(int index) {
         participantes.remove(index);
-
     }
 
     @Override
     public Participante findById(int index) {
         return participantes.get(index);
     }
+
 }

@@ -5,19 +5,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.springframework.stereotype.Controller;
 
-import javax.swing.*;
-
 @Controller
-public class Asistenciacontroller {
-    @FXML TextField txtnum1, txtnum2;
-    @FXML Label txtresult;
+public class AsistenciaController {
+
+    @FXML TextField txtNum1, txtNum2;
+    @FXML Label txtResult;
 
     @FXML
-    private void sumar() {
-        double num1 = Double.parseDouble(txtnum1.getText());
-        double num2 = Double.parseDouble(txtnum2.getText());
+    public void sumar() {
+        double num1 = Double.parseDouble(txtNum1.getText());
+        double num2 = Double.parseDouble(txtNum2.getText());
         double resultado = num1 + num2;
-
-        txtresult.setText(String.valueOf(resultado));
+        txtResult.setText(String.valueOf(resultado));
     }
 }

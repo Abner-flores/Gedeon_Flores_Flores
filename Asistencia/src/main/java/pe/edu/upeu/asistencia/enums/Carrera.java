@@ -1,6 +1,5 @@
 package pe.edu.upeu.asistencia.enums;
 
-import javafx.beans.property.StringProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,14 +8,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public enum Carrera {
-    SISTEMAS(Facultad.FIA,"ING. de sistemas"),
-    CIVIL(Facultad.FIA,"ING. de civil"),
-    AMBIENTAL(Facultad.FIA,"ING. de ambiental"),
+    SISTEMAS(Facultad.FIA, "Ing. Sistemas"),
+    CIVIL(Facultad.FIA, "Ing. Civil"),
+    AMBIENTAL(Facultad.FIA, "Ing. Ambiental"),
 
-    ADMINISTRACION(Facultad.FCE,"Administracion"),
-    NUTICION(Facultad.FCE,"NUTICION"),
-    EDUCACION(Facultad.FACIHED,"EDUCACION"),
+    ADMINISTRACION(Facultad.FCE, "Administración"),
+    NUTRICION(Facultad.FCS, "Nutrición"),
+    EDUCACION(Facultad.FACIHED, "Educación"),
     ;
+
     private Facultad facultad;
     private String descripcion;
 }
