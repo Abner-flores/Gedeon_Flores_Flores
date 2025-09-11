@@ -30,7 +30,7 @@ public class ParticipanteController {
     @Autowired
     ParticipanteServicioI ps;
     @FXML TextField txtdni, txtnombre, txtapellido;
-
+    int indexE=-1;
     @FXML
     public void initialize(){
         cbxCarrera.getItems().setAll(Carrera.values());
@@ -47,6 +47,7 @@ public class ParticipanteController {
         tipoParCol = new TableColumn("Tipo Participante");
         tipoParCol.setMinWidth(160);
         opcionCol = new TableColumn("Opcionen");
+        opcionCol.setMinWidth(200);
         tableView.getColumns().addAll(dniCol, nombreCol, apellidoCol, carreraCol, tipoParCol, opcionCol);
 
     }
@@ -58,7 +59,8 @@ public class ParticipanteController {
             Button btnEliminar = new Button("Eliminar");
                 {
                     btnEditar.setOnAction((event) -> {
-                        System.out.println("Editando participante");
+                        Participante participante = getTableView().getItems().get(getIndex());
+                        editarParticipante(participante, getIndex());
                     });
                     btnEliminar.setOnAction((event) -> {
                         eliminarParticipante(getIndex());
@@ -79,6 +81,16 @@ public class ParticipanteController {
             }
                 };
         opcionCol.setCellFactory(cellFactory);
+    }
+
+    public void editarParticipante(Participante p,int index){
+        txtdni.setText(p.getDni().getValue());
+        txtnombre.setText(p.getNombre().getValue());
+        txtapellido.setText(p.getApellidos().getValue());
+        cbxCarrera.getSelectionModel().select(p.getCarrera());
+        cbxTipoParticipante.getSelectionModel().select(p.getTipoParticipante());
+        indexE=index;
+
     }
 
     public void listarParticipante(){
@@ -104,9 +116,25 @@ public class ParticipanteController {
         participante.setApellidos(new SimpleStringProperty(txtapellido.getText()));
         participante.setCarrera(cbxCarrera.getValue());
         participante.setTipoParticipante(cbxTipoParticipante.getValue());
-        ps.save(participante);
+        if(indexE==-1){
+            ps.save(participante);
+        }else{
+            ps.update(participante, indexE);
+            indexE=-1;
+        }
+        limpiarFormulario();
         listarParticipante();
     }
+
+    public void limpiarFormulario(){
+        txtdni.setText("");
+        txtnombre.setText("");
+        txtapellido.setText("");
+        cbxCarrera.getSelectionModel().clearSelection();
+        cbxTipoParticipante.getSelectionModel().clearSelection();
+
+    }
+
     public void eliminarParticipante(int index){
         ps.delete(index);
         listarParticipante();
