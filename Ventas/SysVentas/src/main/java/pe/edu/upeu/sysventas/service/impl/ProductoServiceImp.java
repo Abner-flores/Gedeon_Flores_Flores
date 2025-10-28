@@ -14,8 +14,7 @@ import java.util.List;
 
 @Service
 public class ProductoServiceImp implements ProductoIService {
-    private static final Logger logger =
-            LoggerFactory.getLogger(ProductoServiceImp.class);
+    private static final Logger logger =LoggerFactory.getLogger(ProductoServiceImp.class);
     @Autowired
     ProductoRepository pRepo;
     @Override
@@ -45,9 +44,7 @@ public class ProductoServiceImp implements ProductoIService {
         try {
             for (Producto producto :
                     pRepo.listAutoCompletProducto(nombre + "%")) {
-                ModeloDataAutocomplet data = new ModeloDataAutocomplet();
-                data.setIdx(producto.getNombre());
-
+                ModeloDataAutocomplet data = new ModeloDataAutocomplet();data.setIdx(producto.getNombre());
                 data.setNameDysplay(String.valueOf(producto.getIdProducto()));
                 data.setOtherData(producto.getPu() + ":" +
                         producto.getStock());

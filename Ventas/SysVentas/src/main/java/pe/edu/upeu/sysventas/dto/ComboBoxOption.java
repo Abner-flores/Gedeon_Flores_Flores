@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-
 public class ComboBoxOption {
     String key;
     String value;
@@ -17,4 +16,3 @@ public class ComboBoxOption {
         return value;
     }
 }
-

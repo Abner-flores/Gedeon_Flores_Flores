@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ProductoController {
+
     @FXML
     TextField txtNombreProducto, txtPUnit,
             txtPUnitOld, txtUtilidad, txtStock, txtStockOld,
@@ -50,14 +51,17 @@ public class ProductoController {
     @FXML
     private AnchorPane miContenedor;
     Stage stage;
+
     @Autowired
     IMarcaService ms;
     @Autowired
     ICategoriaService cs;
     @Autowired
-    ProductoIService ps;
-    @Autowired
     IUnidadMedidaService ums;
+
+    @Autowired
+    ProductoIService ps;
+
     private Validator validator;
     ObservableList<Producto> listarProducto;
     Producto formulario;
@@ -95,6 +99,7 @@ public class ProductoController {
             tableView.getItems().addAll(productosFiltrados);
         }
     }
+
     public void listar(){
         try {
             tableView.getItems().clear();
@@ -108,6 +113,7 @@ public class ProductoController {
             System.out.println(e.getMessage());
         }
     }
+
     @FXML
     public void initialize() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000),
@@ -183,6 +189,7 @@ public class ProductoController {
         tableView.setTableMenuButtonVisible(true);
         listar();
     }
+
     public void limpiarError() {
         List<Control> controles = List.of(
                 txtNombreProducto, txtPUnit, txtPUnitOld,
@@ -191,6 +198,7 @@ public class ProductoController {
         );
         controles.forEach(c -> c.getStyleClass().remove("text-field-error"));
     }
+
     public void clearForm() {
         txtNombreProducto.clear();
         txtPUnit.clear();
@@ -204,6 +212,7 @@ public class ProductoController {
         idProductoCE = 0L;
         limpiarError();
     }
+
     public void editForm(Producto producto){
         txtNombreProducto.setText(producto.getNombre());
         txtPUnit.setText(producto.getPu().toString());
@@ -236,6 +245,7 @@ public class ProductoController {
         idProductoCE=producto.getIdProducto();
         limpiarError();
     }
+
     private double parseDoubleSafe(String value) {
         if (value == null || value.trim().isEmpty()) return 0.0;
         try {
@@ -244,6 +254,7 @@ public class ProductoController {
             return 0.0;
         }
     }
+
     private void mostrarErroresValidacion(List<ConstraintViolation<Producto>> violaciones) {
         limpiarError();
         //Mantiene el orden de los campos del formulario
@@ -289,6 +300,7 @@ public class ProductoController {
             }
         }
     }
+
     private void procesarFormulario() {
         lbnMsg.setText("Formulario válido");
         lbnMsg.setStyle("-fx-text-fill: green; -fx-font-size: 16px;");
@@ -306,6 +318,7 @@ public class ProductoController {
         clearForm();
         listar();
     }
+
     @FXML
     public void validarFormulario() {
         formulario = new Producto();

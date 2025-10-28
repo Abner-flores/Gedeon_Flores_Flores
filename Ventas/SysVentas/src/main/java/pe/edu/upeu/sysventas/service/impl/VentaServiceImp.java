@@ -22,14 +22,17 @@ import java.util.HashMap;
 @RequiredArgsConstructor
  @Service
 public class VentaServiceImp extends CrudGenericoServiceImp<Venta, Long> implements IVentaService {
+
     @Autowired
     private DataSource dataSource;
+
     private final VentaRepository ventaRepository;
 
     @Override
     protected ICrudGenericoRepository<Venta, Long> getRepo() {
         return ventaRepository;
     }
+
     @Override
     public File getFile(String filex) {
         File newFolder = new File("jasper");

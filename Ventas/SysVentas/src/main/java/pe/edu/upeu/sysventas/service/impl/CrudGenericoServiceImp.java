@@ -1,6 +1,7 @@
 package pe.edu.upeu.sysventas.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.sysventas.exception.ModelNotFoundException;
 import pe.edu.upeu.sysventas.repository.ICrudGenericoRepository;
@@ -32,7 +33,7 @@ public abstract class CrudGenericoServiceImp<T,ID> implements ICrudGenericoServi
 
     @Override
     public T findById(ID id) {
-        return getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND "+id));
+       return getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND "+id));
     }
 
     @Override

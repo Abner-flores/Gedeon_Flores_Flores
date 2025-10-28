@@ -16,13 +16,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ClienteServiceImp extends CrudGenericoServiceImp<Cliente,String> implements IClienteService {
-    Logger logger= LoggerFactory.getLogger(ClienteServiceImp.class);
     private final ClienteRepository clienteRepository;
+
+    Logger logger= LoggerFactory.getLogger(ClienteServiceImp.class);
 
     @Override
     protected ICrudGenericoRepository<Cliente, String> getRepo() {
         return clienteRepository;
     }
+
     @Override
     public List<ModeloDataAutocomplet> listAutoCompletCliente() {
         List<ModeloDataAutocomplet> listarclientes = new ArrayList<>();
@@ -39,5 +41,6 @@ public class ClienteServiceImp extends CrudGenericoServiceImp<Cliente,String> im
         }
         return listarclientes;
     }
+
 
 }

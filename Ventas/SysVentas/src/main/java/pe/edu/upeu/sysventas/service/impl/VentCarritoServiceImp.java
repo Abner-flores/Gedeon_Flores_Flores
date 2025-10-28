@@ -1,9 +1,9 @@
 package pe.edu.upeu.sysventas.service.impl;
 
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upeu.sysventas.model.VentCarrito;
 import pe.edu.upeu.sysventas.repository.ICrudGenericoRepository;
 import pe.edu.upeu.sysventas.repository.VentCarritoRepository;
@@ -15,20 +15,21 @@ import java.util.List;
 @Service
 public class VentCarritoServiceImp extends CrudGenericoServiceImp<VentCarrito, Long> implements IVentCarritoService {
 
-    private final VentCarritoRepository ventCarritoRepository;
+    private final VentCarritoRepository carritoRepository;
 
     @Override
     protected ICrudGenericoRepository<VentCarrito, Long> getRepo() {
-        return ventCarritoRepository;
+        return carritoRepository;
     }
     @Override
     public List<VentCarrito> listaCarritoCliente(String dni) {
-        return ventCarritoRepository.listaCarritoCliente(dni);
+        return carritoRepository.listaCarritoCliente(dni);
     }
     @Transactional
     @Override
     public void deleteCarAll(String dniruc) {
-        ventCarritoRepository.deleteByDniruc(dniruc);
+        carritoRepository.deleteByDniruc(dniruc);
     }
+
 
 }
