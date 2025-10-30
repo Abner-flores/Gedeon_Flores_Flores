@@ -33,11 +33,11 @@ public class EmailService {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to)); // Correo del destinatario
             message.setSubject("Inicio de Sesión Exitoso");
             message.setText("Hola " + userName + ",\n\n" +
-                    "Has iniciado sesión exitosamente en tu cuenta.\n" +
+                    "Has iniciado sesión en la DB de la libreria BARNEY, TEN UN EXCELENTE DIA.\n" +
                     "Detalles del inicio de sesión:\n" +
                     "IP: " + ipAddress + "\n" +
                     "Fecha y hora: " + java.time.LocalDateTime.now() + "\n\n" +
-                    "Si no fuiste tú, por favor contacta al soporte inmediatamente.");
+                    "Si no fuiste tú, por favor contacta al soporte inmediatamente. att: ING josefth");
 
             // Enviar el mensaje
             Transport.send(message);

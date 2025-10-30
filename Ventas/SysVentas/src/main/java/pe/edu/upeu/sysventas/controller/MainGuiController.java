@@ -75,6 +75,7 @@ public class MainGuiController {
         bp.setCenter(tabPaneFx);
         MenuItemListener m=new MenuItemListener();
         m.abrirTabConFXML("/view/main_producto.fxml",  "Productos");
+
     }
 
 
