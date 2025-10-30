@@ -16,24 +16,25 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import pe.edu.upeu.sysventas.components.StageManager;
 import pe.edu.upeu.sysventas.components.Toast;
 import pe.edu.upeu.sysventas.dto.SessionManager;
 import pe.edu.upeu.sysventas.model.Usuario;
 import pe.edu.upeu.sysventas.service.IUsuarioService;
+import pe.edu.upeu.sysventas.service.EmailService;
 
 import java.io.IOException;
 
 @Controller
-//@Component
 public class LoginController {
 
     @Autowired
     private ApplicationContext context;
     @Autowired
     IUsuarioService us;
+    @Autowired
+    EmailService emailService; // Servicio para enviar notificaciones por correo electrónico
     @FXML
     TextField txtUsuario;
     @FXML
@@ -49,22 +50,27 @@ public class LoginController {
         System.exit(0);
     }
 
-
     @FXML
     public void login(ActionEvent event) throws IOException {
         try {
-            Usuario usu=us.loginUsuario(txtUsuario.getText(), new String(txtClave.getText()));
-            if (usu!=null) {
+            Usuario usu = us.loginUsuario(txtUsuario.getText(), txtClave.getText());
+            if (usu != null) {
+                // Guardar detalles de la sesión
                 SessionManager.getInstance().setUserId(usu.getIdUsuario());
                 SessionManager.getInstance().setUserName(usu.getUser());
-
                 SessionManager.getInstance().setUserPerfil(usu.getIdPerfil().getNombre());
-                FXMLLoader loader = new  FXMLLoader(getClass().getResource("/view/maingui.fxml"));
+
+                // Notificación por correo electrónico
+                String ipAddress = "127.0.0.1"; // Simulación de la IP (puedes obtener la real si es necesario)
+                emailService.sendLoginNotification(usu.getEmail(), usu.getUser(), ipAddress);
+
+                // Cargar la interfaz principal
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/maingui.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent mainRoot = loader.load();
                 Screen screen = Screen.getPrimary();
                 Rectangle2D bounds = screen.getBounds();
-                Scene mainScene = new Scene(mainRoot,bounds.getWidth(), bounds.getHeight()-30);
+                Scene mainScene = new Scene(mainRoot, bounds.getWidth(), bounds.getHeight() - 30);
                 mainScene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.getIcons().add(new Image(getClass().getResource("/img/store.png").toExternalForm()));
@@ -78,17 +84,15 @@ public class LoginController {
                 stage.setHeight(bounds.getHeight());
                 stage.show();
             } else {
-                Stage stage = (Stage) ((Node)
-                        event.getSource()).getScene().getWindow();
-                double with=stage.getWidth()*2;
-                double h=stage.getHeight()/2;
-                System.out.println(with + " h:"+h);
+                // Credenciales inválidas
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                double with = stage.getWidth() * 2;
+                double h = stage.getHeight() / 2;
+                System.out.println(with + " h:" + h);
                 Toast.showToast(stage, "Credencial invalido!! intente nuevamente", 2000, with, h);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
-
 }

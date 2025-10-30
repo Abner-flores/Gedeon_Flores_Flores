@@ -35,7 +35,54 @@ public class Usuario {
     private String clave;
     @Column(name = "estado", nullable = false, length = 10)
     private String estado;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
     @ManyToOne(optional = false)
     private Perfil idPerfil;
+
+
+/*
+
+        private String idUsuario;
+        private String user;
+        private String email; // Agregamos el atributo email
+
+        // Constructor
+        public Usuario(String idUsuario, String user, String email) {
+            this.idUsuario = idUsuario;
+            this.user = user;
+            this.email = email;
+        }
+
+        // Getter para email
+        public String getEmail() {
+            return email;
+        }
+
+        // Setter para email
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        // Otros getters y setters
+        public String getIdUsuario() {
+            return idUsuario;
+        }
+
+        public void setIdUsuario(String idUsuario) {
+            this.idUsuario = idUsuario;
+        }
+
+        public String getUser() {
+            return user;
+        }
+
+        public void setUser(String user) {
+            this.user = user;
+        }
+*/
+
 }
